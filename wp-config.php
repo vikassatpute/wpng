@@ -13,16 +13,26 @@
  *
  * @package WordPress
  */
-
+if(isset($_ENV[`CLEARDB_DATABASE_URL`])) {
+          $db = parse_url($_ENV[`CLEARDB_DATABASE_URL`]);
+          define('DB_NAME', trim($db[`path`],`/`));
+          define('DB_USER', $db[`user`]);
+          define('DB_PASSWORD', $db[`pass`]);
+          define('DB_HOST', $db[`host`]);
+          define('DB_CHARSET', 'utf8');
+          define('DB_COLLATE', '');
+      } else {
+          //die('No Database credentials!');
+     
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'heroku_543929b3e4a033a');
+define('DB_NAME', 'wpangular');
 
 /** MySQL database username */
-define('DB_USER', 'bd57fd4651dfdd');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', '9a44b5ceed8aae4 ');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -32,7 +42,7 @@ define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
-
+ }
 /**#@+
  * Authentication Unique Keys and Salts.
  *
